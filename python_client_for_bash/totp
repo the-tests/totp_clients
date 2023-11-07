@@ -62,5 +62,6 @@ try:
     sleep(1)
     print(LINE_UP * (len(entities) + 1), end=LINE_CLEAR)
 except KeyboardInterrupt:
-  print()
+  print(LINE_UP * (len(entities) + 1), end=LINE_CLEAR)
+  print('\n' * len(entities))
   exit(0)
