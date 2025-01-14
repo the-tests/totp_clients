@@ -38,7 +38,9 @@ def colorful_print(name: str, totp_value: str, interval: int) -> None:
     '_' * (int(time()) % interval) +
     DEFAULT
   )
-  print('  ', name, totp_value, '|' + last_bar + '|')
+  value_to_print = '  ' + name + ' ' + totp_value + ' |' + last_bar + '|'
+  print(value_to_print)
+  return len(value_to_print) - len(color) - len(DEFAULT)
 
 def get_totp(secret, digits, interval):
   totp = pyotp.TOTP(secret)
@@ -47,21 +49,24 @@ def get_totp(secret, digits, interval):
   return totp.now()
 
 print()
+line_length = 0
 try:
   while True:
     for entity in entities:
       if not entity.get("secret"):
         print(f"<secret> should be set for <{entity.get('name', 'noName')}>")
         continue
-      colorful_print(
+      l = colorful_print(
         entity.get("name", "noName"),
         get_totp(entity["secret"], entity.get("digits", DEFAULT_DIGITS), entity.get("interval", DEFAULT_INTERVAL)),
         entity.get("interval", DEFAULT_INTERVAL)
       )
+      if l > line_length:
+        line_length = l
     print()
     sleep(1)
     print(LINE_UP * (len(entities) + 1), end=LINE_CLEAR)
 except KeyboardInterrupt:
   print(LINE_UP * (len(entities) + 1), end=LINE_CLEAR)
-  print('\n' * len(entities))
+  print((f'  {"■" * (line_length - 2)}\n' * len(entities)).lstrip(' '))
   exit(0)
