@@ -12,8 +12,13 @@ sudo apt install libzbar0
 - Install dependencies
 
 ```shell
-sudo pip install opencv-python pyscreenshot numpy pyzbar
-sudo chmod +x read_qr.py
+pip install opencv-python pyscreenshot numpy pyzbar
+```
+
+- Make file executable (optional)
+
+```shell
+chmod +x read_qr.py
 ```
 
 ## Run
@@ -23,10 +28,10 @@ sudo chmod +x read_qr.py
 
     ```json
     {
-    "name": "Github:yourlogin",
-    "digits": 6,
-    "interval": 30,
-    "secret": "ABCDEF..."
+      "name": "Github:yourlogin",
+      "digits": 6,
+      "interval": 30,
+      "secret": "ABCDEF..."
     }
     ```
 
