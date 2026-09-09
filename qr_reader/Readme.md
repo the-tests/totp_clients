@@ -12,7 +12,7 @@ sudo apt install libzbar0
 - Install dependencies
 
 ```shell
-pip install opencv-python pyscreenshot numpy pyzbar
+pip install opencv-python pyscreenshot numpy pyzbar pillow
 ```
 
 - Make file executable (optional)
